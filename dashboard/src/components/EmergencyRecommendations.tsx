@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { emergencyRecommendations } from "@/lib/mockData";
-import { EmergencyRecommendation } from "@/lib/types";
+import type { EmergencyRecommendation } from "@/lib/types";
 import { ChevronDown, ChevronUp, AlertTriangle, Flame, PersonStanding } from "lucide-react";
 
 const incidentIcons: Record<string, React.ReactNode> = {
@@ -72,7 +71,11 @@ function RecommendationCard({ rec }: { rec: EmergencyRecommendation }) {
   );
 }
 
-export default function EmergencyRecommendations() {
+interface EmergencyRecommendationsProps {
+  recommendations: EmergencyRecommendation[];
+}
+
+export default function EmergencyRecommendations({ recommendations }: EmergencyRecommendationsProps) {
   return (
     <div className="bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
       <div className="px-4 py-2 border-b border-slate-700 flex items-center justify-between">
@@ -80,10 +83,10 @@ export default function EmergencyRecommendations() {
           <AlertTriangle className="w-4 h-4 text-red-400" />
           Emergency Recommendations
         </h2>
-        <span className="text-xs text-slate-400">{emergencyRecommendations.length} active</span>
+        <span className="text-xs text-slate-400">{recommendations.length} active</span>
       </div>
       <div className="divide-y divide-slate-700/50">
-        {emergencyRecommendations.map((rec) => (
+        {recommendations.map((rec) => (
           <RecommendationCard key={rec.id} rec={rec} />
         ))}
       </div>
