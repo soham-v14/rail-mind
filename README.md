@@ -46,6 +46,8 @@ RailMind is a unified platform that combines:
 | **Risk Prediction** — ML-based incident likelihood scoring using weather, track, and operational data | Built |
 | **Emergency Response Agent** — Structured action plans with step-by-step guidance for any incident type | Built |
 | **Control Dashboard** — Real-time command center with live map, alerts, CCTV viewer, and AI assistant | Built |
+| **Smart Mock Fallback** — All pages fetch from live API, silently fall back to mock data if backend is unreachable | Built |
+| **Responsive Design** — Mobile bottom nav, adaptive grids, works on all screen sizes | Built |
 | **Delay Propagation** — Predict how a single delayed train cascades across the network | Planned |
 | **Railway Digital Twin** — Interactive simulation of trains, stations, and network state | Planned |
 | **Conversational AI Agent** — Natural language querying of railway operations | Planned |
@@ -81,6 +83,19 @@ RailMind is a unified platform that combines:
 - **Emergency Recommendations** — Collapsible cards with step-by-step actions
 - **AI Chat Assistant** — Conversational interface for railway queries
 - **System Status** — Live clock, connectivity indicators, and phase badges
+
+### Smart Mock Fallback
+- Every page fetches live data from the backend on load
+- If the API is unreachable (no database, backend down), it silently falls back to mock data
+- No error screens, no loading spinners — seamless degradation
+- `/risk/predict` and `/emergency/assess` work without any database
+
+### Responsive Design
+- Mobile bottom navigation bar replaces sidebar on small screens
+- Dashboard 3-column grid collapses to single column on mobile
+- Alert page intelligence panel is collapsible on mobile
+- Hero section adapts height and text sizing
+- All pages work on mobile, tablet, and desktop
 
 ---
 
@@ -231,6 +246,11 @@ railmind/
 ├── designs/                          # UI design exports
 ├── models/
 │   └── risk_model.json               # Trained XGBoost model
+├── dashboard/public/
+│   ├── logo.svg                      # RailMind brand logo
+│   ├── cctv/cam1-4.svg               # CCTV feed placeholders (SVG)
+│   ├── map-bg.svg                    # Network map background
+│   └── operator-avatar.svg           # Operator profile avatar
 ├── data/
 │   └── image1.jpg                    # Sample detection image
 ├── run_detection.py                  # CLI entry for detection

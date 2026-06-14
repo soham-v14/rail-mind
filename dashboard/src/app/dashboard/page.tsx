@@ -10,14 +10,11 @@ import AgentReasoningPanel from "@/components/AgentReasoningPanel";
 import { fetchDashboardSummary, fetchDashboardMap, fetchAlerts } from "@/lib/api";
 import type { StatCardData } from "@/components/StatCards";
 
-const CCTV_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAa7WxaCGu2PZhONsuwVXuGOl5ZTXyP5OU_tVZXhLcBkrluslEtJc4b4QblXuoHH4JlEX6lI1xViypAAL-aXsSAsMOn9rdBFo3wnT-1p1B52Yx-4CSpPR10Z2fke9BMNS_Eh692meMon_fxVttlPamUsveDVwgeJJ4rZR2Xh3mVwbxV1nbBzQSUPsm-kLF84rBuz5oeND-s6Fj0IM-WL1GWT_ZfWKr8gDlPpVg3TrwKkc6uYcDyRY-KaFsRLzi8jVM4WfZnq77McpeY";
+const CCTV_CAMS = ["cam1", "cam2", "cam3", "cam4"];
 
-const MAP_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuB6_WtLj587D05SodQV80XMUqT-J96XxraIbHjMm4RnrMKMBf5CxBUFPcnAx9d-rzaQ7ARhA6Z3aKE_IYJrFfEDWhPidAZ9t26GiXW2eo_W6h-AA6GjErc61ITtmLZGtPYup9lwdRxXJKhAzC9U7sPcFuW5Vn7YNaDw9XO1AooLC7AHK4N90galKZ7alwewbMlaDtaenR7lP1Y-9yNf-HB2S1Qq8udy3F1lhq5IYDX1slbBUQH2wxBU2OKI-ajxQVsxhMKNVNgKmccD";
+const MAP_IMAGE = "/map-bg.svg";
 
-const OPERATOR_AVATAR =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCTb99MuGg8VlTemZS2wYkmbOS429m98p22LH4p2iZsJKy3d6yhkRBA8cMOz1ziy0aZa1t_uDDj_-jUjm_kBHhvRqWankoQ4Oq-VOVQGSdjvrMtp495bI6ZeI_eRBgHvbihcqxRv0WxGtb88xxDmkR-Af_T3mSa2dy1PS9pP_MsgugGyHpoKizDpOQeraQOF9Y_DKPw5GfMcsO9ZX9viOCisMUKwcjN_XYWqfkpevFAPtBJQUUGONVnTh60G1Rs_TMpNjUuefUieXDI";
+const OPERATOR_AVATAR = "/operator-avatar.svg";
 
 export default function Dashboard() {
   const [stats, setStats] = useState<StatCardData[]>([
@@ -104,12 +101,10 @@ export default function Dashboard() {
         {/* LEFT: CCTV + Stats */}
         <div className="flex min-h-0 min-w-0 flex-col gap-3">
           <CctvFeed
-            cameras={[
-              { id: "cam1", label: "CAM 1", name: "CAM 1 - Mumbai Central", imageUrl: CCTV_IMAGE },
-              { id: "cam2", label: "CAM 2", name: "CAM 2 - Dadar", imageUrl: CCTV_IMAGE },
-              { id: "cam3", label: "CAM 3", name: "CAM 3 - Thane", imageUrl: CCTV_IMAGE },
-              { id: "cam4", label: "CAM 4", name: "CAM 4 - Kalyan", imageUrl: CCTV_IMAGE },
-            ]}
+            cameras={CCTV_CAMS.map((id) => ({
+              id, label: id.toUpperCase(), name: `CAM ${id.slice(-1)} - ${["Mumbai Central", "Dadar", "Thane", "Kalyan"][parseInt(id.slice(-1)) - 1]}`,
+              imageUrl: `/cctv/${id}.svg`,
+            }))}
             activeCameraId="cam1"
             detectionCount={8}
             resolution="1080p 60fps"

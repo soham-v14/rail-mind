@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#0f172a"/>
+  <g opacity="0.2">
+    <line x1="0" y1="400" x2="1200" y2="400" stroke="#334155" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="#334155" stroke-width="0.5"/>
+    <line x1="0" y1="600" x2="1200" y2="600" stroke="#334155" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="800" stroke="#334155" stroke-width="1"/>
+    <line x1="300" y1="0" x2="300" y2="800" stroke="#334155" stroke-width="0.5"/>
+    <line x1="900" y1="0" x2="900" y2="800" stroke="#334155" stroke-width="0.5"/>
+  </g>
+  <g opacity="0.4">
+    <circle cx="200" cy="300" r="80" fill="none" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4"/>
+    <circle cx="200" cy="300" r="3" fill="#22d3ee"/>
+    <text x="200" y="410" font-family="monospace" font-size="11" fill="#22d3ee" text-anchor="middle">CSMT</text>
+    <circle cx="700" cy="350" r="60" fill="none" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4"/>
+    <circle cx="700" cy="350" r="3" fill="#22d3ee"/>
+    <text x="700" y="430" font-family="monospace" font-size="11" fill="#22d3ee" text-anchor="middle">Dadar</text>
+    <circle cx="900" cy="450" r="50" fill="none" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4"/>
+    <circle cx="900" cy="450" r="3" fill="#22d3ee"/>
+    <text x="900" y="520" font-family="monospace" font-size="11" fill="#22d3ee" text-anchor="middle">Thane</text>
+  </g>
+  <g opacity="0.3">
+    <path d="M 200 300 Q 450 320 700 350" fill="none" stroke="#3b82f6" stroke-width="2"/>
+    <path d="M 700 350 Q 800 400 900 450" fill="none" stroke="#3b82f6" stroke-width="2"/>
+  </g>
+  <g opacity="0.7">
+    <rect x="380" y="250" width="8" height="8" fill="#22c55e" transform="rotate(45 384 254)"/>
+    <rect x="650" y="320" width="8" height="8" fill="#eab308" transform="rotate(45 654 324)"/>
+    <rect x="580" y="280" width="10" height="10" fill="#ef4444" transform="rotate(45 585 285)"/>
+  </g>
+  <circle cx="580" cy="280" r="100" fill="none" stroke="#ef4444" stroke-width="2" opacity="0.3"/>
+  <text x="400" y="700" font-family="monospace" font-size="14" fill="#64748b" text-anchor="middle" opacity="0.6">RAILWAY NETWORK MAP</text>
+</svg>

@@ -9,12 +9,12 @@ import {
 import { useState } from "react";
 
 const navItems = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/dashboard", label: "Command Center", icon: LayoutDashboard },
-  { href: "/map", label: "Live Map", icon: Map },
-  { href: "/alerts", label: "Alerts", icon: Bell },
-  { href: "/cctv", label: "Surveillance", icon: Camera },
-  { href: "/assistant", label: "AI Assistant", icon: Bot },
+  { href: "/", label: "Home", shortLabel: "Home", icon: Home },
+  { href: "/dashboard", label: "Command Center", shortLabel: "Center", icon: LayoutDashboard },
+  { href: "/map", label: "Live Map", shortLabel: "Map", icon: Map },
+  { href: "/alerts", label: "Alerts", shortLabel: "Alerts", icon: Bell },
+  { href: "/cctv", label: "Surveillance", shortLabel: "CCTV", icon: Camera },
+  { href: "/assistant", label: "AI Assistant", shortLabel: "AI", icon: Bot },
 ];
 
 export default function Sidebar() {
@@ -26,8 +26,10 @@ export default function Sidebar() {
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-slate-700 bg-slate-900 px-1 py-1.5 md:hidden">
         <Link href="/" className="flex flex-col items-center gap-0.5 rounded-lg px-1 py-1">
-          <img src="/logo.svg" alt="RailMind" className="w-6 h-6" />
-          <span className="text-[8px] text-slate-500">RailMind</span>
+          <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-blue-600/20 ring-1 ring-blue-500/30">
+            <img src="/logo.svg" alt="RailMind" className="w-5 h-5" />
+          </div>
+          <span className="text-[8px] text-blue-400 font-semibold">RailMind</span>
         </Link>
         {navItems.slice(1).map((item) => {
           const active = pathname === item.href;
@@ -36,12 +38,12 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-0.5 rounded-lg px-2 py-1 transition ${
+              className={`flex flex-col items-center gap-0 rounded-lg px-1 py-1 transition ${
                 active ? "text-blue-400" : "text-slate-500 hover:text-slate-300"
               }`}
             >
               <Icon className="h-5 w-5" />
-              <span className="text-[10px]">{item.label}</span>
+              <span className="text-[9px] leading-tight">{item.shortLabel}</span>
             </Link>
           );
         })}
@@ -55,14 +57,21 @@ export default function Sidebar() {
       >
         <div className="flex items-center justify-between px-4 h-14 border-b border-slate-700">
           {!collapsed && (
-            <div className="flex items-center gap-2">
-              <img src="/logo.svg" alt="RailMind" className="w-7 h-7" />
-              <span className="text-white text-sm font-semibold">RailMind</span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-600/20 ring-2 ring-blue-500/30 shadow-lg shadow-blue-500/10">
+                <img src="/logo.svg" alt="RailMind" className="w-7 h-7" />
+              </div>
+              <div>
+                <span className="block text-white text-sm font-semibold leading-tight">RailMind</span>
+                <span className="block text-[10px] text-blue-400/60 font-mono">v3.0</span>
+              </div>
             </div>
           )}
           {collapsed && (
             <div className="w-full flex justify-center">
-              <img src="/logo.svg" alt="RailMind" className="w-7 h-7" />
+              <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-blue-600/20 ring-1 ring-blue-500/30">
+                <img src="/logo.svg" alt="RailMind" className="w-6 h-6" />
+              </div>
             </div>
           )}
           <button

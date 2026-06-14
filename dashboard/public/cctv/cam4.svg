@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#0f172a"/>
+  <rect x="0" y="0" width="800" height="600" fill="url(#grid)" opacity="0.15"/>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a855f7" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect x="50" y="50" width="700" height="420" rx="4" fill="none" stroke="#a855f7" opacity="0.3" stroke-width="1"/>
+  <text x="400" y="300" font-family="monospace" font-size="18" fill="#a855f7" text-anchor="middle" opacity="0.6">LIVE FEED</text>
+  <text x="400" y="330" font-family="monospace" font-size="14" fill="#64748b" text-anchor="middle" opacity="0.5">CAM 4 - Kalyan</text>
+  <rect x="30" y="20" width="80" height="24" rx="4" fill="#ef4444" opacity="0.8"/>
+  <circle cx="42" cy="32" r="4" fill="white"/>
+  <text x="52" y="36" font-family="monospace" font-size="11" fill="white" font-weight="bold">REC</text>
+  <circle cx="350" cy="200" r="25" fill="none" stroke="#ef4444" stroke-width="2" opacity="0.7"/>
+  <rect x="300" y="235" width="100" height="20" rx="3" fill="#ef4444" opacity="0.6"/>
+  <text x="350" y="249" font-family="monospace" font-size="10" fill="white" text-anchor="middle">FIRE (87%)</text>
+</svg>

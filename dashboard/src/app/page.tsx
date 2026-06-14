@@ -5,8 +5,7 @@ import Link from "next/link";
 import { useHomeInteractions } from "@/hooks/useHomeInteractions";
 import { fetchDashboardSummary } from "@/lib/api";
 
-const HERO_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDBeSiXGDRy9YN0B8YFkC1Ik96cbOueSlfrc3BD9QJPCzVGAHqKSEpDo9z-ngP9V_vm3I3lqoUsDSaFQPi4jy_bin3NeUMG3EOeGhuLyXIP3lERQKnUdGKwOA04vyRjVYZql8pL8yg2glFSfLA7o5a1M8pIAoUSoWqJBkk3L2G8HaWolrXu9CwYo-qalZ3LTM36IJsNPo-gC5Qczb6WJobkTIhkvb6J2L9FgdWMMSjmMmG43ZS6gzOzM32fW3bsy22KtjcHNEXUnRSl";
+const HERO_IMAGE = "/cctv/cam1.svg";
 
 export default function Home() {
   const { heroSectionRef, heroImgRef } = useHomeInteractions();
