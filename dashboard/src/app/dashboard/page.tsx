@@ -103,16 +103,12 @@ export default function Dashboard() {
           <CctvFeed
             cameras={CCTV_CAMS.map((id) => ({
               id, label: id.toUpperCase(), name: `CAM ${id.slice(-1)} - ${["Mumbai Central", "Dadar", "Thane", "Kalyan"][parseInt(id.slice(-1)) - 1]}`,
-              imageUrl: `/cctv/${id}.svg`,
+              imageUrl: `/cctv/${id}.jpg`,
             }))}
             activeCameraId="cam1"
-            detectionCount={8}
-            resolution="1080p 60fps"
-            boundingBoxes={[
-              { id: "b1", positionClass: "top-[40%] left-[30%] w-16 h-24", variant: "error" },
-              { id: "b2", positionClass: "top-[45%] left-[60%] w-12 h-20", variant: "primary" },
-              { id: "b3", positionClass: "top-[60%] left-[20%] w-20 h-10", variant: "error", label: "DEFECT: Crack (98%)" },
-            ]}
+            detectionCount={0}
+            resolution="Live Feed"
+            boundingBoxes={[]}
           />
 
           <StatCards stats={stats} classNameOverride="h-auto" />
