@@ -4,6 +4,10 @@
 
 > *"Predicting incidents before they happen and helping operators respond in real time."*
 
+## 🌐 Live Demo
+
+**Dashboard:** https://rail-mind-nine.vercel.app/
+
 ---
 
 ## Overview
