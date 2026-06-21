@@ -139,6 +139,9 @@ FALLBACK_STAKEHOLDERS = {
 OPENAI_MODEL = os.environ.get("RAILMIND_LLM_MODEL", "gpt-4o-mini")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
+GEMINI_MODEL = os.environ.get("RAILMIND_GEMINI_MODEL", "gemini-2.0-flash")
+GEMINI_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+
 SYSTEM_PROMPT = """You are RailMind's Emergency Response Coordinator — an AI assistant for railway incident management.
 
 Given an incident report, output a structured JSON response with:

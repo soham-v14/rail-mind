@@ -8,6 +8,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.db.database import init_db
+from backend.db import models  # noqa: F401 — ensure models are registered before init_db
 from backend.ws.manager import manager
 from backend.routers import trains, alerts, dashboard
 
@@ -19,6 +21,8 @@ from modules.emergency_agent.router import router as emergency_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("RailMind backend starting...")
+    init_db()
+    print("Database tables ready.")
     yield
     print("RailMind backend shutting down...")
 

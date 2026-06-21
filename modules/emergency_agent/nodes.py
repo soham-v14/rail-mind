@@ -5,6 +5,7 @@ from typing import TypedDict, Optional
 from .config import (
     INCIDENT_CATEGORIES, FALLBACK_ACTIONS, FALLBACK_STAKEHOLDERS,
     OPENAI_API_KEY, OPENAI_MODEL, SYSTEM_PROMPT,
+    GEMINI_API_KEY, GEMINI_MODEL,
 )
 from .schemas import ActionItem, Stakeholder
 
@@ -52,9 +53,13 @@ def recommend_node(state: AgentState) -> dict:
     escalation = state["escalation_level"]
     location = state["location"]
 
-    if state.get("use_llm") and OPENAI_API_KEY:
-        return _llm_recommend(state)
+    if not state.get("use_llm"):
+        return _fallback_recommend(incident_type, escalation, location)
 
+    if GEMINI_API_KEY:
+        return _gemini_recommend(state)
+    if OPENAI_API_KEY:
+        return _llm_recommend(state)
     return _fallback_recommend(incident_type, escalation, location)
 
 
@@ -96,6 +101,54 @@ def _llm_recommend(state: AgentState) -> dict:
     from langchain_core.messages import SystemMessage, HumanMessage
 
     llm = ChatOpenAI(model=OPENAI_MODEL, temperature=0.1)
+
+    incident_context = json.dumps({
+        "incident_type": state["incident_type"],
+        "location": state["location"],
+        "severity": state["severity"],
+        "risk_score": state.get("risk_score"),
+        "detected_objects": state.get("detected_objects", []),
+        "description": state.get("description", ""),
+        "category": state.get("category"),
+        "escalation_level": state.get("escalation_level"),
+    }, indent=2)
+
+    user_message = f"""Incident report:
+
+{incident_context}
+
+Output a JSON object with these keys:
+- category (string)
+- escalation_level (string: critical/high/medium/low)
+- summary (string)
+- actions (array of objects with: step, action, priority, assigned_to)
+- stakeholders (array of objects with: name, role, contact)"""
+
+    messages = [
+        SystemMessage(content=SYSTEM_PROMPT),
+        HumanMessage(content=user_message),
+    ]
+
+    try:
+        response = llm.invoke(messages)
+        parsed = json.loads(response.content.strip().removeprefix("```json").removesuffix("```").strip())
+    except Exception:
+        return _fallback_recommend(state["incident_type"], state["escalation_level"], state["location"])
+
+    return {
+        "actions": parsed.get("actions", []),
+        "stakeholders": parsed.get("stakeholders", []),
+        "summary": parsed.get("summary", ""),
+        "category": parsed.get("category", state.get("category")),
+        "escalation_level": parsed.get("escalation_level", state.get("escalation_level")),
+    }
+
+
+def _gemini_recommend(state: AgentState) -> dict:
+    from langchain_google_genai import ChatGoogleGenerativeAI
+    from langchain_core.messages import SystemMessage, HumanMessage
+
+    llm = ChatGoogleGenerativeAI(model=GEMINI_MODEL, temperature=0.1)
 
     incident_context = json.dumps({
         "incident_type": state["incident_type"],

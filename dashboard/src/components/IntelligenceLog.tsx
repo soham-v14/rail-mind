@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { IntelligenceLog, SuggestedAction } from "@/lib/types";
-import { streamIntelligenceLogs } from "@/lib/mockData";
 
 interface IntelligenceLogPanelProps {
   logs: IntelligenceLog[];
   suggestedAction: SuggestedAction;
+  streamLogs?: IntelligenceLog[];
 }
 
 function logMessageClass(type: IntelligenceLog["type"]): string {
@@ -22,22 +22,22 @@ function logMessageClass(type: IntelligenceLog["type"]): string {
   }
 }
 
-export default function IntelligenceLogPanel({ logs, suggestedAction }: IntelligenceLogPanelProps) {
+export default function IntelligenceLogPanel({ logs, suggestedAction, streamLogs = [] }: IntelligenceLogPanelProps) {
   const [visibleLogs, setVisibleLogs] = useState<IntelligenceLog[]>(logs);
   const [streamIndex, setStreamIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (streamIndex >= streamIntelligenceLogs.length) return;
+    if (streamIndex >= streamLogs.length) return;
 
     const delay = 3000 + Math.floor(Math.random() * 5000);
     const timer = window.setTimeout(() => {
-      setVisibleLogs((prev) => [...prev, streamIntelligenceLogs[streamIndex]]);
+      setVisibleLogs((prev) => [...prev, streamLogs[streamIndex]]);
       setStreamIndex((prev) => prev + 1);
     }, delay);
 
     return () => window.clearTimeout(timer);
-  }, [streamIndex]);
+  }, [streamIndex, streamLogs]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });

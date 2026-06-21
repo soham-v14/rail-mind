@@ -18,6 +18,7 @@ export interface StatCardData {
 
 export interface StatCardsProps {
   stats: StatCardData[];
+  classNameOverride?: string;
 }
 
 const accentBorder: Record<StatAccent, string> = {
@@ -32,9 +33,9 @@ const accentValue: Record<StatAccent, string> = {
   orange: "text-orange-400",
 };
 
-export default function StatCards({ stats }: StatCardsProps) {
+export default function StatCards({ stats, classNameOverride }: StatCardsProps) {
   return (
-    <div className="grid h-24 shrink-0 grid-cols-3 gap-2">
+    <div className={classNameOverride || "grid h-24 shrink-0 grid-cols-3 gap-2"}>
       {stats.map((stat) => (
         <div
           key={stat.id}

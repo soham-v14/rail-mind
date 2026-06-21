@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { MapPin, Train, TriangleAlert } from "lucide-react";
-import { trains, stations, riskZones } from "@/lib/mockData";
+import { MapPin } from "lucide-react";
 import type { Train as TrainType, Station, RiskZone } from "@/lib/types";
 
 function getRiskColor(category: string) {
@@ -32,7 +31,13 @@ function getTrainColor(status: string) {
   }
 }
 
-export default function MapView() {
+interface MapViewProps {
+  trains: TrainType[];
+  stations: Station[];
+  riskZones: RiskZone[];
+}
+
+export default function MapView({ trains, stations, riskZones }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
 
@@ -85,7 +90,7 @@ export default function MapView() {
           iconSize: [12, 12],
           iconAnchor: [6, 6],
         });
-        const marker = L.marker([t.lat, t.lng], { icon })
+        L.marker([t.lat, t.lng], { icon })
           .addTo(map)
           .bindPopup(
             `<b>${t.name}</b> (${t.id})<br/>Speed: ${t.speed} km/h<br/>Status: ${t.status}${t.delay_minutes ? `<br/>Delay: ${t.delay_minutes} min` : ""}`
@@ -119,7 +124,7 @@ export default function MapView() {
         delete (mapRef.current as any)._leaflet_id;
       }
     };
-  }, []);
+  }, [trains, stations, riskZones]);
 
   return (
     <div className="bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
@@ -134,7 +139,7 @@ export default function MapView() {
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500" /> Risk zone</span>
         </div>
       </div>
-      <div ref={mapRef} className="h-[400px] w-full" />
+      <div ref={mapRef} className="h-[300px] md:h-[400px] w-full" />
     </div>
   );
 }
